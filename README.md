@@ -29,7 +29,7 @@ err := group.Try(func(service *Service) error {
 })
 
 if err != nil {
-    fmt.Println("Could not connect to primary or backup service!")
+    fmt.Println("Could not connect to any service!")
 }
 
 ```
@@ -61,7 +61,7 @@ err := group.Try(func(service *Service) error {
 })
 
 if err != nil {
-    fmt.Println("Could not connect to primary or backup service!")
+    fmt.Println("Could not connect to first or second service!")
 }
 
 ```

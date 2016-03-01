@@ -1,7 +1,5 @@
 # Go Service
-A small Go (golang) library for handling failing external services and load balancing across services.
-
-If you use more than 1 service to provide the same functionality, this library might be for you.
+A small Go (golang) library for handling failing services and load balancing across services.
 
 ## Using backups
 

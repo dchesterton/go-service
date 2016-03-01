@@ -9,28 +9,28 @@ The library will try to use the services in the order that they're given. It kee
 recently failed, and not call them for a while to stop the service being overloaded.
 
 ```go
-  primaryService := ...
-  backupService := ...
-  backupToBackupService := ...
+primaryService := ...
+backupService := ...
+backupToBackupService := ...
 
-	group := service.NewServiceGroup(
-		service.NewService("primary", primaryService),
-		service.NewService("backup", backupService),
-		service.NewService("backup_to_backup", backupToBackupService),
-	)
+group := service.NewServiceGroup(
+    service.NewService("primary", primaryService),
+    service.NewService("backup", backupService),
+    service.NewService("backup_to_backup", backupToBackupService),
+)
 
-	err := group.Try(func(service *Service) error {
-	  // do something with service
-	
-	  // you should return an error if the service is not working
-	  // return fmt.Errorf("")
+err := group.Try(func(service *Service) error {
+    // do something with service
 
-		return nil
-	})
+    // you should return an error if the service is not working
+    // return fmt.Errorf("")
 
-  if err != nil {
+    return nil
+})
+
+if err != nil {
     fmt.Println("Could not connect to primary or backup service!")
-  }
+}
 
 ```
 
@@ -40,28 +40,28 @@ You can tell the library to load balance across different services. This is help
 wish to split the traffic equally.
 
 ```go
-  firstService := ...
-  secondService := ...
+firstService := ...
+secondService := ...
 
-	group := service.NewServiceGroup(
-		service.NewService("first", firstService),
-		service.NewService("second", secondService),
-	)
+group := service.NewServiceGroup(
+    service.NewService("first", firstService),
+    service.NewService("second", secondService),
+)
 
-	// load balance equally across the two services
-	group.LoadBalance = true
+// load balance equally across the two services
+group.LoadBalance = true
 
-	err := group.Try(func(service *Service) error {
-	  // do something with service
-	
-	  // you should return an error if the service is not working
-	  // return fmt.Errorf("")
+err := group.Try(func(service *Service) error {
+    // do something with service
 
-		return nil
-	})
+    // you should return an error if the service is not working
+    // return fmt.Errorf("")
 
-  if err != nil {
+    return nil
+})
+
+if err != nil {
     fmt.Println("Could not connect to primary or backup service!")
-  }
+}
 
 ```
